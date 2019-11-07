@@ -39,7 +39,7 @@ public class SortTestingHelpers {
 	 * Get the static data as a ListADT!
 	 * @return [9,8,4,7,6,5,4,3,2,1]
 	 */
-	public ListADT<Integer> getData() {
+	public static ListADT<Integer> getData() {
 		ListADT<Integer> sortMe = new JavaList<>();
 		for (int y : SortTestingHelpers.data) {
 			sortMe.addBack(y);
