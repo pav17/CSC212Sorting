@@ -12,16 +12,32 @@ public class MergeSort {
 			return input;
 		}
 		ListADT<Integer> slice1 = input.slice(0, input.size()/2);
-		System.out.println("slice 1 = "+slice1);
 		ListADT<Integer> slice2 = input.slice(input.size()/2, input.size());
-		System.out.println("slice 2 = "+slice2);
 		
 		slice1 = RecursiveMergeSort(slice1);
 		slice2 = RecursiveMergeSort(slice2);
 		
 		ListADT<Integer> combined = Combine(slice1, slice2);
-		System.out.println("combined = "+combined);
 		return combined;
+	}
+	
+	public static ListADT<Integer> IterativeMergeSort(ListADT<Integer> input) {
+		ListADT<ListADT<Integer>> workQueue = new DoublyLinkedList<ListADT<Integer>>();
+		
+		while (!input.isEmpty()) {
+			ListADT<Integer> tempList = new JavaList<Integer>();
+			tempList.addBack(input.removeFront());
+			workQueue.addBack(tempList);
+		}
+		
+		while (true) {
+			ListADT<Integer> combined = Combine(workQueue.removeFront(), workQueue.removeFront());
+			workQueue.addBack(combined);
+			if (workQueue.size() == 1) {
+				break;
+			}
+		}
+		return workQueue.getFront();
 	}
 	
 	private static ListADT<Integer> Combine(ListADT<Integer> input1, ListADT<Integer> input2) {
@@ -34,12 +50,12 @@ public class MergeSort {
 					output.addBack(input1.removeFront());
 				}
 			} else if (input1.size() == 0) {
-				for (int i = 0; i < input2.size(); i++) {
+				while (!input2.isEmpty()) {
 					output.addBack(input2.removeFront());
 				}
 				break;
 			} else if (input2.size() == 0) {
-				for (int i = 0; i < input1.size(); i++) {
+				while (!input1.isEmpty()) {
 					output.addBack(input1.removeFront());
 				}
 				break;

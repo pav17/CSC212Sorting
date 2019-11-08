@@ -19,9 +19,16 @@ public class MergeSortTest {
 	public void testRecursiveMergeSort() {
 		ListADT<Integer> sortMe = SortTestingHelpers.getData();
 		int originalSize = sortMe.size();
-		System.out.println(sortMe);
 		ListADT<Integer> sorted = MergeSort.RecursiveMergeSort(sortMe);
-		System.out.println(sorted);
+		Assert.assertEquals(originalSize, sorted.size());
+		Assert.assertEquals(true, SortTestingHelpers.checkSorted(sorted, originalSize));
+	}
+	
+	@Test
+	public void testMergeSort() {
+		ListADT<Integer> sortMe = SortTestingHelpers.getData();
+		int originalSize = sortMe.size();
+		ListADT<Integer> sorted = MergeSort.IterativeMergeSort(sortMe);
 		Assert.assertEquals(originalSize, sorted.size());
 		Assert.assertEquals(true, SortTestingHelpers.checkSorted(sorted, originalSize));
 	}
