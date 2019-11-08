@@ -8,11 +8,20 @@ public class MergeSort {
 	
 	
 	public static ListADT<Integer> RecursiveMergeSort(ListADT<Integer> input) {
-		ListADT<Integer> output = new JavaList<Integer>();
-		if (input.size() > 1) {
-			
+		if (input.size() == 1) {
+			return input;
 		}
-		return output;
+		ListADT<Integer> slice1 = input.slice(0, input.size()/2);
+		System.out.println("slice 1 = "+slice1);
+		ListADT<Integer> slice2 = input.slice(input.size()/2, input.size());
+		System.out.println("slice 2 = "+slice2);
+		
+		slice1 = RecursiveMergeSort(slice1);
+		slice2 = RecursiveMergeSort(slice2);
+		
+		ListADT<Integer> combined = Combine(slice1, slice2);
+		System.out.println("combined = "+combined);
+		return combined;
 	}
 	
 	private static ListADT<Integer> Combine(ListADT<Integer> input1, ListADT<Integer> input2) {
@@ -20,9 +29,9 @@ public class MergeSort {
 		while (true) {
 			if (input1.size() > 0 && input2.size() > 0) {
 				if (input1.getFront() >= input2.getFront()) {
-					output.addBack(input1.removeFront());
-				} else {
 					output.addBack(input2.removeFront());
+				} else {
+					output.addBack(input1.removeFront());
 				}
 			} else if (input1.size() == 0) {
 				for (int i = 0; i < input2.size(); i++) {
