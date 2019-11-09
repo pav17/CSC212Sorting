@@ -1,9 +1,5 @@
 package edu.smith.cs.csc212.sorting;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -11,7 +7,6 @@ import edu.smith.cs.csc212.sorting.SimpleSorts;
 
 import edu.smith.cs.csc212.sorting.SortTestingHelpers;
 import me.jjfoley.adt.ListADT;
-import me.jjfoley.adt.impl.JavaList;
 
 public class SimpleSortsTest {
 
